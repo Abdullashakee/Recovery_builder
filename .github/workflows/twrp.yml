@@ -5,22 +5,22 @@ on:
 
 env:
   # (required) twrp manifest 
-  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git
+  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
   # (required) manifest branch 
-  BRANCH: twrp-9.0
-  # (required) device codename i.e: sweet mojito.. 
-  DEVICE: m10lte
+  BRANCH: twrp-10
+  # (required) device codename i.e: Infinix-X698
+  DEVICE: Infinix_X698
   # (required) device tree link with branch if exists
-  DT_LINK: https://github.com/SA-15/android_device_samsung_m10lte
+  DT_LINK: https://github.com/Abdullashakee/android_device_infinix_Infinix-X698
   # (required) who made your phone ? 
   MANUFACTURER: samsung
   # (required) recovery partiton = recovery, else (no recovery partition): boot 
   TARGET: recovery
   # dont change that
   IMAGE: image
-  # (required) depend of device tree if you see twrp_"codename".mk use twrp
-  # else (omni_"codename".mk): omni
-  OT: omni
+  # (required) depend of device tree if you see twrp_"Infinix-X698".mk use twrp
+  # else (twrp_"Infinix-X698".mk): twrp
+  OT: twrp
   # dont change that
   SYM: _
   # (required) output format for some reason samsung phones need a custom mkbootimg
@@ -50,13 +50,13 @@ jobs:
              cd work
              repo init -u $MANIFEST -b $BRANCH --depth=1              
              repo sync -c -j700 --force-sync --no-clone-bundle --no-tags
-             git clone $DT_LINK --depth=1 --single-branch device/$MANUFACTURER/$DEVICE          
-             
+             git clone $DT_LINK --depth=1 --single-branch device/infinix/Infinix_X698         
+            
        - name: Build twrp
          run: |
               cd work
               . build/envsetup.sh && lunch $OT$SYM$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET$IMAGE -j60
-              zip twrp.zip /home/runner/work/Recovery_builder/Recovery_builder/work/out/target/product/$DEVICE/$TARGET$FORMAT
+              zip twrp.zip /home/runner/work/Recovery_builder/Recovery_builder/work/out/target/product/Infinix_X698/$TARGET$FORMAT
 
        - name: Save in artifact
          uses: actions/upload-artifact@v3
