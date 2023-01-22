@@ -13,7 +13,7 @@ env:
   # (required) device tree link with branch if exists
   DT_LINK: https://github.com/Abdullashakee/android_device_infinix_Infinix-X698
   # (required) who made your phone ? 
-  MANUFACTURER: samsung
+  MANUFACTURER: infinix
   # (required) recovery partiton = recovery, else (no recovery partition): boot 
   TARGET: recovery
   # dont change that
